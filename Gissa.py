@@ -1,21 +1,26 @@
+
+'''
+Gissa.py: Ett program som genererar ett hemligt nummer och spelaren har 7 gissningar p sig att lista ut nummret
+
+__author__  = "Hugo Warmland"
+__version__ = "1.0.0"
+__email__   = "hugo.warmland@elev.ga.dbgy.se"
+'''
+
 import random
 import os
 import subprocess
+from bcolors import bcolors
 
 subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
-guess=0
-guesses=7
-x=1
-corect=False
-nummber=random.randint(1,100)
 
-
-print("""Välkomen till mitt spel!
+print(bcolors.PURPLE + """Välkomen till mitt spel!
 Du ska gissa ett tal mellan 1 och 100
 Du kommer få 7 gissningar på dig att gissa rätt
 """)
+
 while True:
-    guess=0
+    
     guesses=7
     x=1
     corect=False
@@ -24,27 +29,33 @@ while True:
         
         while True:
             try:
-                guess=int(input("Gissnig "+str(x)+":"))
+                guess=int(input(bcolors.DEFAULT + "Gissnig "+str(x)+":"))
                 break
             except:
-                print("Skriv bara siffror")
+                print(bcolors.CYAN + "Skriv bara siffror")
 
         if nummber == guess:
-            print("Du gissade rätt!")
+            print(bcolors.GREEN + "Bra jobbat, du gissade rätt!")
             corect=True
             break
         elif guess<=nummber:
-            print("Ditt nummer är för litet")
+            print(bcolors.BLUE + "För litet")
         elif guess>=nummber:
-            print("Ditt nummer är för stort")
+            print(bcolors.RED + "För stort")
+        
         guesses-=1
         x+=1
-        print("Du har",guesses,"gissningar kvar")
-
+        print(bcolors.CYAN + "Du har",guesses,"gissningar kvar")
 
     if corect==False:
         print("Svaret var",nummber)
+
     
-    answer=input("Om du vill köra igen skriv ja ")
-    if answer.upper() != "JA":
-        exit()
+    while True:
+        answer=input(bcolors.DEFAULT + "Vill du köra igen?")
+        if answer.upper() == "JA":
+            break
+        elif answer.upper() == "NEJ":
+            exit()
+        else:
+            print("skriv ja eller nej")
