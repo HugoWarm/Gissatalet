@@ -12,11 +12,12 @@ import os
 import subprocess
 from bcolors import bcolors
 
-subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
+
 
 
 
 while True:
+    subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
     print(bcolors.LIGHT_PURPLE + """--------------------------------------------------
           Välkomen till mitt spel!
     Du ska gissa ett tal mellan 1 och 100
@@ -38,16 +39,19 @@ Du kommer få 7 gissningar på dig att gissa rätt
                 break
             except:
                 print(bcolors.CYAN + "Skriv bara siffror")
+                
         if guess == 0:
             exit()
+
         if nummber == guess:
-            print(bcolors.GREEN + "Bra jobbat, du gissade rätt!\nDu har",str(guesses-1),"gissningar kvar")
+            print(bcolors.GREEN + "Bra jobbat, du gissade rätt!\nDu hade till och med",str(guesses-1),"gissningar kvar")
             corect=True
             break
         elif guess<=nummber:
             print(bcolors.BLUE + "För litet")
         elif guess>=nummber:
             print(bcolors.RED + "För stort")
+
         if guesses==7:
             färg=46
         elif guesses==6:
@@ -73,10 +77,10 @@ Du kommer få 7 gissningar på dig att gissa rätt
 
     
     while True:
-        answer=input(bcolors.DEFAULT + "Vill du köra igen?")
-        if answer.upper() == "JA":
+        answer=input(bcolors.DEFAULT + "Vill du köra igen? \n J = ja N = nej ")
+        if answer.upper() == "J":
             break
-        elif answer.upper() == "NEJ":
+        elif answer.upper() == "N":
             exit()
         else:
-            print("Skriv ja eller nej")
+            print("\nSkriv j eller n\n")
